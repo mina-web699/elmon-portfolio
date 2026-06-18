@@ -87,7 +87,16 @@ header nav a.active-link {
 }
 .hero-content h3 {
     font-size: 24px;
+   
     font-weight: 500;
+}
+.cursor {
+    color: #00df9a;
+    animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
 }
 .hero-content h1 {
     font-size: 56px;
