@@ -8,8 +8,8 @@
   text-decoration: none;
 }
 body {
-  background-color: #030f18; /* لون الـ Depth الداكن والعميق كخلفية أساسية فخمة */
-  color: #e0e8e6; /* لون الـ Frost الثلجي الفاتح للنصوص لتباين مريح جداً */
+  background-color: #030f18; 
+  color: #e0e8e6; 
   font-family: "Poppins", sans-serif;
   overflow-x: hidden;
 }
@@ -32,13 +32,13 @@ header {
     15,
     24,
     0.8
-  ); /* مدمج مع لون الـ Depth مع Blur احترافي */
+  ); 
   backdrop-filter: blur(12px);
   display: flex;
   justify-content: space-between;
   align-items: center;
   z-index: 100;
-  border-bottom: 1px solid rgba(114, 163, 191, 0.1); /* خط سفلي نحيف جداً بلون الـ Glacier */
+  border-bottom: 1px solid rgba(114, 163, 191, 0.1); 
   transition: 0.3s ease;
 }
 .logo a {
@@ -49,7 +49,7 @@ header {
 }
 .logo .logo-icon {
   font-size: 20px;
-  color: #72a3bf; /* الأيقونة بلون الـ Glacier المضيء */
+  color: #72a3bf; 
   transition: 0.3s ease;
 }
 .logo .logo-text {
@@ -62,7 +62,7 @@ header {
 header nav a {
   display: inline-block;
   font-size: 16px;
-  color: #446e87; /* الروابط بلون الـ Marine الهادئ قبل الـ Hover */
+  color: #446e87; 
   font-weight: 500;
   margin-left: 35px;
   transition: 0.3s ease;
@@ -70,7 +70,7 @@ header nav a {
 }
 header nav a:hover,
 .logo a:hover .logo-icon {
-  color: #72a3bf; /* تتحول للـ Glacier المضيء عند التمرير */
+  color: #72a3bf; 
   transform: translateY(-2px);
   text-shadow: 0 0 15px rgba(114, 163, 191, 0.4);
 }
@@ -94,23 +94,23 @@ header nav a.active-link {
   padding: 0 10%;
   overflow: hidden;
 
-  /* ارفع صورتك في فولدر المشروع ونادي عليها هنا */
+
   background-image: url("./bg-imge-hd/c0796d87b72bb5813f93d2eca9bf25a4.jpg");
-  background-size: cover; /* يضمن إن الصورة تملأ السكشن بالكامل بدون تشويه */
-  background-position: center; /* يخلي سنتر الصورة في نص الشاشة بالظبط */
+  background-size: cover;
+  background-position: center; 
   background-repeat: no-repeat;
-  background-color: #030f18; /* لون الـ Depth كخلفية احتياطية */
+  background-color: #030f18; 
 }
 
-/* طبقة الغطاء الداكنة (مهمة جداً لراحة العين وتباين النص) */
+
 .video-overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 2; /* فوق الصورة وتحت النص */
-  /* تدرج يدمج الصورة مع لون الـ Depth الداكن ليعطي طابع احترافي مريح */
+  z-index: 2; 
+
   background: linear-gradient(
     to bottom,
     rgba(3, 15, 24, 0.85),
@@ -118,10 +118,10 @@ header nav a.active-link {
   );
 }
 
-/* حاوية النصوص (تظل ثابتة وفوق كل شيء) */
+
 .hero-content {
   position: relative;
-  z-index: 10; /* أعلى من الـ overlay */
+  z-index: 10; 
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -129,18 +129,18 @@ header nav a.active-link {
   max-width: 700px;
 }
 
-/* تنسيق العناوين والنصوص بالباليتة الفخمة */
+
 .hero-content h3 {
   font-size: 24px;
   font-weight: 500;
-  color: #72a3bf; /* لون الـ Glacier المضيء */
+  color: #72a3bf;
   margin: 0;
 }
 
 .hero-content h1 {
   font-size: 56px;
   font-weight: 700;
-  color: #e0e8e6; /* لون الـ Frost الساطع */
+  color: #e0e8e6; 
   line-height: 1.2;
   margin: 0;
 }
@@ -162,7 +162,7 @@ header nav a.active-link {
 /* ABOUT ME SECTION STYLES */
 .about-me {
   padding: 100px 10% 80px;
-  background-color: #1d4052; /* سكشن عني بلون الـ Harbor لكسر ريتم الخلفية */
+  background-color: #1d4052; 
   color: #e0e8e6;
 }
 .about-content h3 {
@@ -200,13 +200,13 @@ header nav a.active-link {
   gap: 20px;
 }
 .skill-content > ul > li {
-  background-color: #1d4052; /* كروت المهارات بلون الـ Harbor الداكن */
+  background-color: #1d4052; 
   padding: 15px 30px;
   border-radius: 8px;
   font-weight: 600;
   font-size: 18px;
   text-transform: uppercase;
-  border: 1px solid rgba(114, 163, 191, 0.15); /* إطار ناعم بلون الـ Glacier */
+  border: 1px solid rgba(114, 163, 191, 0.15);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 .skill-content ul li ul li {
@@ -219,7 +219,7 @@ header nav a.active-link {
 /* PROJECTS SECTION STYLES */
 .projects {
   padding: 100px 10% 80px;
-  background-color: #1d4052; /* سكشن المشاريع بلون الـ Harbor المتميز */
+  background-color: #1d4052; 
 }
 .heading {
   text-align: center;
@@ -236,7 +236,7 @@ header nav a.active-link {
   gap: 30px;
 }
 .project-card {
-  background-color: #030f18; /* كروت المشاريع تعود للون العميق الـ Depth لتظهر بوضوح فوق الـ Harbor */
+  background-color: #030f18; 
   border-radius: 12px;
   padding: 25px;
   border: 1px solid rgba(255, 255, 255, 0.01);
@@ -244,7 +244,7 @@ header nav a.active-link {
 }
 .project-card:hover {
   transform: translateY(-6px);
-  border-color: #72a3bf; /* إضاءة حواف الكارت باللون الثلجي عند الـ Hover */
+  border-color: #72a3bf; 
   box-shadow: 0 15px 30px rgba(114, 163, 191, 0.12);
 }
 .project-card h3 {
@@ -275,7 +275,7 @@ header nav a.active-link {
 }
 .btn-sm:hover {
   background-color: #72a3bf;
-  color: #030f18; /* ينعكس الخط للون الداكن جداً لسهولة القراءة الاستثنائية */
+  color: #030f18; 
   box-shadow: 0 0 15px rgba(114, 163, 191, 0.3);
 }
 
@@ -304,7 +304,7 @@ header nav a.active-link {
 .social-icon {
   font-size: 24px;
   color: #e0e8e6;
-  background-color: #1d4052; /* خلفية الأيقونات بلون الـ Harbor الدائري */
+  background-color: #1d4052; 
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -337,7 +337,7 @@ header nav a.active-link {
   text-align: center;
   border-top: 1px solid rgba(114, 163, 191, 0.05);
   font-size: 14px;
-  color: #446e87; /* الفوتر مدمج بلون الـ Marine الهادئ */
+  color: #446e87; 
 }
 .scroll-top {
   position: fixed;
