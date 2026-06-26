@@ -9,9 +9,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Vast+Shadow&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght=300;400;500;600;700&display=swap"
         rel="stylesheet">
     <title>My Portfolio</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <meta name="title" content="Mina Maged | Frontend Web Developer Portfolio">
     <meta name="description"
@@ -22,11 +24,12 @@
     <meta name="robots" content="index, follow">
 
     <meta property="og:type" content="website">
-    <meta property="og:url" content=" https://mina-web699.github.io/elmon-portfolio/">
+    <meta property="og:url" content="https://mina-web699.github.io/elmon-portfolio/">
     <meta property="og:title" content="Mina Maged | Frontend Web Developer Portfolio">
     <meta property="og:description"
         content="Explore my latest frontend web development projects, skills, and coding journey. Clean code, modern UI, and responsive experiences.">
     <meta property="og:image" content="https://i.pinimg.com/736x/9c/09/69/9c0969fc842d5aea7df5c3c4bef18375.jpg">
+
 
 </head>
 
@@ -49,10 +52,11 @@
     </header>
 
     <section id="home" class="hero-section">
+        <div class="video-overlay"></div>
         <div class="hero-content">
             <h3>Hello, It's Me</h3>
             <h1>Mina Maged</h1>
-            <h3>And I'm a <span class="text-animate">Frontend Developer</span></h3>
+            <h4>And I'm a <span class="text-animate">Frontend Developer</span></h4>
             <p>I build clean, modern, and fully responsive web experiences with passion and clean code.</p>
         </div>
     </section>
@@ -90,7 +94,9 @@
 
     <section id="projects" class="projects">
         <h2 class="heading">My <span>Projects</span></h2>
-        <div class="projects-container">
+
+        <div class="projects-container" id="projects-dynamic-container">
+
             <div class="project-card">
                 <div class="card-content">
                     <h3>Flip-Card Login Page</h3>
@@ -123,8 +129,8 @@
                 <div class="card-content">
                     <h3>Gym website</h3>
                     <p>A dynamic, fully responsive gym website designed to maximize user engagement. Features a bold
-                        visual layout, smooth
-                        interactive elements, and modern frontend architecture built for high performance.</p>
+                        visual layout, smooth interactive elements, and modern frontend architecture built for high
+                        performance.</p>
                     <div class="project-links">
                         <a href="https://mina-web699.github.io/GymWebsite/" target="_blank" class="btn-sm">Live Demo</a>
                         <a href="https://1drv.ms/f/c/66fed6762def09ab/IgAxYHddaDpjR4peTNh9qAv8AQOotV3SCZKO1Szv3bxT1o0?e=EA04PN"
@@ -132,41 +138,41 @@
                     </div>
                 </div>
             </div>
+
             <div class="project-card">
                 <div class="card-content">
                     <h3>Shopping Online</h3>
                     <p>A modern online store built for speed and engagement, featuring intuitive product browsing and
-                        flawless mobile
-                        responsiveness.</p>
+                        flawless mobile responsiveness.</p>
                     <div class="project-links">
                         <a href="https://bit.ly/shoping-online-brand" target="_blank" class="btn-sm">Live Demo</a>
                         <a href="https://1drv.ms/f/c/66fed6762def09ab/IgAN52TgUaTbTqsOm8DMtn6WAfD25hyuWukmVrz7fiKFsDU?e=SiFALQ"
-                            t target="_blank" class="btn-sm">Code</a>
+                            target="_blank" class="btn-sm">Code</a>
                     </div>
                 </div>
             </div>
+
             <div class="project-card">
                 <div class="card-content">
                     <h3>Restaurant site</h3>
                     <p>Bak Book is a modern, responsive food ordering web app with a premium dark theme. It features a
-                        dynamic menu synced via
-                        Firebase Firestore, a persistent shopping cart, automated WhatsApp checkout, and a secure admin
-                        control panel for live
-                        menu updates.</p>
+                        dynamic menu synced via Firebase Firestore, a persistent shopping cart, automated WhatsApp
+                        checkout, and a secure admin control panel for live menu updates.</p>
                     <div class="project-links">
-                        <a href=" https://mina-web699.github.io/Restaurant/" target="_blank" class="btn-sm">Live
-                            Demo</a>
+                        <a href="https://mina-web699.github.io/Restaurant/" target="_blank" class="btn-sm">Live Demo</a>
                         <a href="https://1drv.ms/f/c/66fed6762def09ab/IgAzCV9EDfXhTps14z_-Xw7OAVm-Py8wdfBtRu6eWUMvuDk?e=v0y59C"
-                            t target="_blank" class="btn-sm">Code</a>
+                            target="_blank" class="btn-sm">Code</a>
                     </div>
                 </div>
             </div>
-        </div>
 
+        </div>
     </section>
 
     <section id="contact-me" class="contact-section">
-        <h2 class="heading">Contact <span>Me</span></h2>
+        <h2 class="heading">Contact <span id="secret-trigger"
+                style="cursor: pointer; user-select: none; color: var(--main-color, #e5c690); display: inline-block; padding: 5px;">Me</span>
+        </h2>
         <p>Get in touch! My inbox is always open.</p>
         <div class="contact-container">
             <div class="social-icons">
@@ -188,8 +194,143 @@
         <p>Copyright &copy; 2026 by Mina Maged | All Rights Reserved.</p>
     </footer>
 
+    <!-- 🔐 مودال تسجيل الدخول السري - تم تعديله ليدعم الموبايل بالكامل -->
+    <div id="auth-modal"
+        style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(11, 15, 25, 0.97); justify-content: center; align-items: center; z-index: 99999; padding: 15px; font-family: 'Poppins', sans-serif;">
+        <div
+            style="background: #111827; border: 1px solid #e5c690; padding: 30px 25px; border-radius: 12px; width: 100%; max-width: 380px; text-align: center; box-shadow: 0 15px 35px rgba(0,0,0,0.6); position: relative;">
+            <h2 style="color: #e5c690; font-size: 1.4rem; margin-bottom: 5px; letter-spacing: 1px; margin-top: 0;">🔐
+                Admin Access</h2>
+            <p style="color: #94a3b8; font-size: 0.85rem; margin-bottom: 20px;">بوابة التحكم الأمنية للمطور مينا</p>
+            <div style="display: flex; flex-direction: column; gap: 15px;">
+                <input type="email" id="admin-email" placeholder="Email Address"
+                    style="width: 100%; padding: 12px; background: rgba(255,255,255,0.02); border: 1px solid rgba(229,198,144,0.25); color: #fff; border-radius: 6px; outline: none; font-size: 0.95rem;"
+                    required>
+                <input type="password" id="admin-password" placeholder="Password"
+                    style="width: 100%; padding: 12px; background: rgba(255,255,255,0.02); border: 1px solid rgba(229,198,144,0.25); color: #fff; border-radius: 6px; outline: none; font-size: 0.95rem;"
+                    required>
+                <button id="login-submit-btn"
+                    style="width: 100%; padding: 12px; background: #e5c690; color: #111827; border: none; font-weight: bold; border-radius: 6px; cursor: pointer; font-size: 1rem; transition: 0.3s;">دخول
+                    بوابة الإدارة 🚀</button>
+                <button id="close-modal-btn"
+                    style="background: transparent; color: #e5c690; border: 1px solid rgba(229,198,144,0.3); width: 100%; padding: 10px; border-radius: 6px; cursor: pointer; font-size: 0.9rem;">إلغاء</button>
+            </div>
+        </div>
+    </div>
+
     <div class="scroll-top" id="scrollTopBtn">&#10148;</div>
     <script src="./script.js"></script>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+        import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCOteYYr4drjiRpWeIwiaqOPL3iu5dSdvU",
+            authDomain: "portifleo-b-y-d.firebaseapp.com",
+            projectId: "portifleo-b-y-d",
+            storageBucket: "portifleo-b-y-d.firebasestorage.app",
+            messagingSenderId: "413280846501",
+            appId: "1:413280846501:web:ec652d3f67d8d658c7034c",
+            measurementId: "G-Z29L0F647V"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        const secretTrigger = document.getElementById("secret-trigger");
+        const authModal = document.getElementById("auth-modal");
+        const closeModalBtn = document.getElementById("close-modal-btn");
+        const loginSubmitBtn = document.getElementById("login-submit-btn");
+        const projectsContainer = document.getElementById("projects-dynamic-container");
+
+        // استبدل الجزء الخاص بالـ Click في كود الـ Script القديم بالـ Event ده:
+
+        let pressTimer;
+
+        // عند بداية اللمس أو الضغط بالماوس
+        secretTrigger.addEventListener("mousedown", startPress);
+        secretTrigger.addEventListener("touchstart", startPress);
+
+        // عند رفع الصباع أو الماوس
+        secretTrigger.addEventListener("mouseup", cancelPress);
+        secretTrigger.addEventListener("mouseleave", cancelPress);
+        secretTrigger.addEventListener("touchend", cancelPress);
+
+        function startPress(e) {
+            // منع السلوك الافتراضي عشان الموبايل ميعملش زووم
+            if (e.type === "touchstart") e.preventDefault();
+
+            pressTimer = window.setTimeout(function () {
+                authModal.style.display = "flex"; // يفتح المودال فوراً بعد ثانيتين
+            }, 2000); // 2000 مللي ثانية يعني ثانيتين
+        }
+
+        function cancelPress() {
+            clearTimeout(pressTimer);
+        }
+
+        closeModalBtn.addEventListener("click", () => { authModal.style.display = "none"; });
+
+        loginSubmitBtn.addEventListener("click", async () => {
+            const email = document.getElementById("admin-email").value.trim();
+            const password = document.getElementById("admin-password").value.trim();
+
+            if (!email || !password) {
+                Swal.fire({ icon: 'warning', title: 'تنبيه', text: 'يرجى ملء جميع الحقول!' });
+                return;
+            }
+
+            try {
+                await signInWithEmailAndPassword(auth, email, password);
+                sessionStorage.setItem("adminLoggedIn", "true");
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'مرحباً بك يا مينا 👋',
+                    text: 'جاري نقلك للوحة التحكم...',
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then(() => {
+                    window.location.href = "admin.html";
+                });
+
+            } catch (error) {
+                console.error(error);
+                Swal.fire({ icon: 'error', title: 'فشل تسجيل الدخول', text: 'البيانات خاطئة!' });
+            }
+        });
+
+        async function loadLiveProjects() {
+            try {
+                const q = query(collection(db, "projects"), orderBy("createdAt", "desc"));
+                const querySnapshot = await getDocs(q);
+
+                querySnapshot.forEach((doc) => {
+                    const data = doc.data();
+                    const card = document.createElement("div");
+                    card.className = "project-card";
+                    card.innerHTML = `
+                        <div class="card-content">
+                            <h3>${data.title}</h3>
+                            <p>${data.description}</p>
+                            <div class="project-links">
+                                <a href="${data.live}" target="_blank" class="btn-sm">Live Demo</a>
+                                <a href="${data.github}" target="_blank" class="btn-sm">Code</a>
+                            </div>
+                        </div>
+                    `;
+                    projectsContainer.appendChild(card);
+                });
+            } catch (error) {
+                console.error("Error loading live projects: ", error);
+            }
+        }
+
+        loadLiveProjects();
+    </script>
 </body>
 
 </html>

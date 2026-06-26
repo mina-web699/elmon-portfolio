@@ -1,374 +1,494 @@
-
 /* GLOBAL STYLES */
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    scroll-behavior: smooth;
-    list-style: none;
-    text-decoration: none;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+  list-style: none;
+  text-decoration: none;
 }
 body {
-    background-color: #0f172a;
-    color: #f8fafc;
-    font-family: 'Poppins', sans-serif;
-    overflow-x: hidden;
+  background-color: #030f18; /* لون الـ Depth الداكن والعميق كخلفية أساسية فخمة */
+  color: #e0e8e6; /* لون الـ Frost الثلجي الفاتح للنصوص لتباين مريح جداً */
+  font-family: "Poppins", sans-serif;
+  overflow-x: hidden;
 }
-h1, .heading, .logo-icon {
-    font-family: 'Vast Shadow', serif;
+h1,
+.heading,
+.logo-icon {
+  font-family: "Vast Shadow", serif;
 }
 
 /* HEADER & NAVBAR STYLES */
 header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 80px;
-    padding: 0 10%;
-    background-color: rgba(30, 41, 59, 0.9);
-    backdrop-filter: blur(10px);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 100;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    transition: 0.3s ease;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  padding: 0 10%;
+  background-color: rgba(
+    3,
+    15,
+    24,
+    0.8
+  ); /* مدمج مع لون الـ Depth مع Blur احترافي */
+  backdrop-filter: blur(12px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+  border-bottom: 1px solid rgba(114, 163, 191, 0.1); /* خط سفلي نحيف جداً بلون الـ Glacier */
+  transition: 0.3s ease;
 }
 .logo a {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
 }
 .logo .logo-icon {
-    font-size: 20px;
-    color: #00df9a;
-    transition: 0.3s ease;
+  font-size: 20px;
+  color: #72a3bf; /* الأيقونة بلون الـ Glacier المضيء */
+  transition: 0.3s ease;
 }
 .logo .logo-text {
-    font-size: 12px;
-    font-weight: 600;
-    color: #f8fafc;
-    text-transform: uppercase;
-    letter-spacing: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #e0e8e6;
+  text-transform: uppercase;
+  letter-spacing: 4px;
 }
 header nav a {
-    display: inline-block;
-    font-size: 16px;
-    color: #f8fafc;
-    font-weight: 500;
-    margin-left: 35px;
-    transition: 0.3s ease;
-    text-transform: capitalize;
+  display: inline-block;
+  font-size: 16px;
+  color: #446e87; /* الروابط بلون الـ Marine الهادئ قبل الـ Hover */
+  font-weight: 500;
+  margin-left: 35px;
+  transition: 0.3s ease;
+  text-transform: capitalize;
 }
-header nav a:hover, .logo a:hover .logo-icon {
-    color: #00df9a;
-    transform: translateY(-3px) scale(1.05);
-    text-shadow: 0 0 18px #00df9a;
+header nav a:hover,
+.logo a:hover .logo-icon {
+  color: #72a3bf; /* تتحول للـ Glacier المضيء عند التمرير */
+  transform: translateY(-2px);
+  text-shadow: 0 0 15px rgba(114, 163, 191, 0.4);
 }
 header nav a.active-link {
-    color: #00df9a;
-    border-bottom: 2px solid #00df9a;
+  color: #72a3bf;
+  border-bottom: 2px solid #72a3bf;
 }
 .menu-icon {
-    font-size: 28px;
-    color: #f8fafc;
-    cursor: pointer;
-    display: none;
+  font-size: 28px;
+  color: #e0e8e6;
+  cursor: pointer;
+  display: none;
 }
 
-/* HERO SECTION STYLES */
+/* ==================== HERO SECTION WITH IMAGE ==================== */
 .hero-section {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    padding: 0 10%;
-    background: radial-gradient(circle at top right, rgba(0, 223, 154, 0.05), transparent);
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 0 10%;
+  overflow: hidden;
+
+  /* ارفع صورتك في فولدر المشروع ونادي عليها هنا */
+  background-image: url("./bg-imge-hd/c0796d87b72bb5813f93d2eca9bf25a4.jpg");
+  background-size: cover; /* يضمن إن الصورة تملأ السكشن بالكامل بدون تشويه */
+  background-position: center; /* يخلي سنتر الصورة في نص الشاشة بالظبط */
+  background-repeat: no-repeat;
+  background-color: #030f18; /* لون الـ Depth كخلفية احتياطية */
 }
+
+/* طبقة الغطاء الداكنة (مهمة جداً لراحة العين وتباين النص) */
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2; /* فوق الصورة وتحت النص */
+  /* تدرج يدمج الصورة مع لون الـ Depth الداكن ليعطي طابع احترافي مريح */
+  background: linear-gradient(
+    to bottom,
+    rgba(3, 15, 24, 0.85),
+    rgba(3, 15, 24, 0.75)
+  );
+}
+
+/* حاوية النصوص (تظل ثابتة وفوق كل شيء) */
+.hero-content {
+  position: relative;
+  z-index: 10; /* أعلى من الـ overlay */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 15px;
+  max-width: 700px;
+}
+
+/* تنسيق العناوين والنصوص بالباليتة الفخمة */
 .hero-content h3 {
-    font-size: 24px;
-    font-weight: 500;
+  font-size: 24px;
+  font-weight: 500;
+  color: #72a3bf; /* لون الـ Glacier المضيء */
+  margin: 0;
 }
+
 .hero-content h1 {
-    font-size: 56px;
-    font-weight: 700;
-    margin: 10px 0;
-    letter-spacing: 2px;
+  font-size: 56px;
+  font-weight: 700;
+  color: #e0e8e6; /* لون الـ Frost الساطع */
+  line-height: 1.2;
+  margin: 0;
 }
+
 .hero-content p {
-    font-size: 16px;
-    color: #94a3b8;
-    max-width: 600px;
-    line-height: 1.6;
+  font-size: 18px;
+  color: #e0e8e6;
+  line-height: 1.6;
+  opacity: 0;
+  margin: 0;
 }
+
 .hero-content .text-animate {
-    color: #00df9a;
+  color: #72a3bf;
+  font-weight: 600;
+  text-shadow: 0 0 15px rgba(114, 163, 191, 0.5);
 }
 
 /* ABOUT ME SECTION STYLES */
 .about-me {
-    padding: 100px 10% 80px;
-    background-color: #1e293b;
+  padding: 100px 10% 80px;
+  background-color: #1d4052; /* سكشن عني بلون الـ Harbor لكسر ريتم الخلفية */
+  color: #e0e8e6;
 }
 .about-content h3 {
-    text-align: center;
-    font-size: 36px;
-    margin-bottom: 40px;
-    color: #00df9a;
-    font-family: 'Vast Shadow', serif;
+  text-align: center;
+  font-size: 36px;
+  margin-bottom: 40px;
+  color: #72a3bf;
+  font-family: "Vast Shadow", serif;
 }
 .about-content p {
-    max-width: 800px;
-    margin: 0 auto;
-    text-align: center;
-    font-size: 18px;
-    line-height: 1.8;
-    color: #94a3b8;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 18px;
+  line-height: 1.8;
+  opacity: 0.95;
 }
 
 /* SKILLS SECTION STYLES */
 .skills {
-    padding: 100px 10% 80px;
+  padding: 100px 10% 80px;
+  background-color: #030f18;
 }
 .skill-content h3 {
-    text-align: center;
-    font-size: 36px;
-    margin-bottom: 40px;
-    color: #00df9a;
-    font-family: 'Vast Shadow', serif;
+  text-align: center;
+  font-size: 36px;
+  margin-bottom: 40px;
+  color: #72a3bf;
+  font-family: "Vast Shadow", serif;
 }
 .skill-content > ul {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
 }
 .skill-content > ul > li {
-    background-color: #1e293b;
-    padding: 15px 30px;
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: 18px;
-    text-transform: uppercase;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+  background-color: #1d4052; /* كروت المهارات بلون الـ Harbor الداكن */
+  padding: 15px 30px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 18px;
+  text-transform: uppercase;
+  border: 1px solid rgba(114, 163, 191, 0.15); /* إطار ناعم بلون الـ Glacier */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 .skill-content ul li ul li {
-    font-size: 14px;
-    color: #00df9a;
-    margin-top: 5px;
-    text-transform: capitalize;
+  font-size: 14px;
+  color: #72a3bf;
+  margin-top: 5px;
+  text-transform: capitalize;
 }
 
 /* PROJECTS SECTION STYLES */
 .projects {
-    padding: 100px 10% 80px;
-    background-color: #1e293b;
+  padding: 100px 10% 80px;
+  background-color: #1d4052; /* سكشن المشاريع بلون الـ Harbor المتميز */
 }
 .heading {
-    text-align: center;
-    font-size: 36px;
-    margin-bottom: 50px;
+  text-align: center;
+  font-size: 36px;
+  margin-bottom: 50px;
+  color: #e0e8e6;
 }
 .heading span {
-    color: #00df9a;
+  color: #72a3bf;
 }
 .projects-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
 }
 .project-card {
-    background-color: #0f172a;
-    border-radius: 12px;
-    padding: 25px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    transition: 0.3s ease;
+  background-color: #030f18; /* كروت المشاريع تعود للون العميق الـ Depth لتظهر بوضوح فوق الـ Harbor */
+  border-radius: 12px;
+  padding: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.01);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 .project-card:hover {
-    transform: translateY(-5px);
-    border-color: #00df9a;
-    box-shadow: 0 10px 20px rgba(0, 223, 154, 0.1);
+  transform: translateY(-6px);
+  border-color: #72a3bf; /* إضاءة حواف الكارت باللون الثلجي عند الـ Hover */
+  box-shadow: 0 15px 30px rgba(114, 163, 191, 0.12);
 }
 .project-card h3 {
-    font-size: 20px;
-    margin-bottom: 15px;
+  font-size: 20px;
+  margin-bottom: 15px;
+  color: #e0e8e6;
 }
 .project-card p {
-    color: #94a3b8;
-    font-size: 14px;
-    line-height: 1.5;
-    margin-bottom: 20px;
+  color: #e0e8e6;
+  opacity: 0.8;
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 20px;
 }
 .project-links {
-    display: flex;
-    gap: 15px;
+  display: flex;
+  gap: 15px;
 }
 .btn-sm {
-    padding: 8px 16px;
-    border: 2px solid #00df9a;
-    color: #00df9a;
-    border-radius: 6px;
-    font-size: 14px;
-    font-weight: 600;
-    transition: 0.3s ease;
+  padding: 8px 16px;
+  border: 1px solid #72a3bf;
+  color: #72a3bf;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  background-color: transparent;
+  transition: 0.3s ease;
 }
 .btn-sm:hover {
-    background-color: #00df9a;
-    color: #0f172a;
+  background-color: #72a3bf;
+  color: #030f18; /* ينعكس الخط للون الداكن جداً لسهولة القراءة الاستثنائية */
+  box-shadow: 0 0 15px rgba(114, 163, 191, 0.3);
 }
 
 /* CONTACT SECTION STYLES */
 .contact-section {
-    padding: 100px 10% 80px;
-    text-align: center;
+  padding: 100px 10% 80px;
+  text-align: center;
+  background-color: #030f18;
 }
 .contact-section p {
-    margin-bottom: 30px;
-    color: #94a3b8;
+  margin-bottom: 30px;
+  color: #e0e8e6;
+  opacity: 0.85;
 }
 .contact-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
 }
 .social-icons {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
 }
 .social-icon {
-    font-size: 24px;
-    color: #f8fafc;
-    background-color: #1e293b;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    transition: 0.3s ease;
+  font-size: 24px;
+  color: #e0e8e6;
+  background-color: #1d4052; /* خلفية الأيقونات بلون الـ Harbor الدائري */
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.02);
+  transition: 0.3s ease;
 }
-/* تأثير الـ Hover المضيء لكل أيقونة */
 .social-icon.email:hover {
-    color: #00df9a;
-    border-color: #00df9a;
-    box-shadow: 0 0 15px rgba(0, 223, 154, 0.3);
+  color: #72a3bf;
+  border-color: #72a3bf;
+  box-shadow: 0 0 15px rgba(114, 163, 191, 0.3);
 }
 .social-icon.whatsapp:hover {
-    color: #25d366;
-    border-color: #25d366;
-    box-shadow: 0 0 15px rgba(37, 211, 102, 0.3);
+  color: #25d366;
+  border-color: #25d366;
+  box-shadow: 0 0 15px rgba(37, 211, 102, 0.3);
 }
 .social-icon.instagram:hover {
-    color: #e1306c;
-    border-color: #e1306c;
-    box-shadow: 0 0 15px rgba(225, 48, 108, 0.3);
+  color: #e1306c;
+  border-color: #e1306c;
+  box-shadow: 0 0 15px rgba(225, 48, 108, 0.3);
 }
+
 /* FOOTER & SCROLL TOP STYLES */
 .main-footer {
-    padding: 25px 10%;
-    background-color: #0f172a;
-    text-align: center;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    font-size: 14px;
-    color: #64748b;
+  padding: 25px 10%;
+  background-color: #030f18;
+  text-align: center;
+  border-top: 1px solid rgba(114, 163, 191, 0.05);
+  font-size: 14px;
+  color: #446e87; /* الفوتر مدمج بلون الـ Marine الهادئ */
 }
 .scroll-top {
-    position: fixed;
-    bottom: 30px;
-    right: 20px;
-    background-color: #00df9a;
-    color: #0f172a;
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    cursor: pointer;
-    transform: rotate(-90deg);
-    box-shadow: 0 5px 15px rgba(0, 223, 154, 0.3);
-    z-index: 999;
-    transition: 0.3s ease;
-    opacity: 0;
-    pointer-events: none;
+  position: fixed;
+  bottom: 30px;
+  right: 20px;
+  background-color: #72a3bf;
+  color: #030f18;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  cursor: pointer;
+  transform: rotate(-90deg);
+  box-shadow: 0 5px 20px rgba(114, 163, 191, 0.4);
+  z-index: 999;
+  transition: 0.3s ease;
+  opacity: 0;
+  pointer-events: none;
 }
 .scroll-top.show {
-    opacity: 1;
-    pointer-events: auto;
+  opacity: 1;
+  pointer-events: auto;
 }
 
 /* RESPONSIVE MEDIA QUERY (FROM 320px TO 780px) */
 @media screen and (max-width: 780px) {
-    .menu-icon {
-        display: block;
-    }
-    header {
-        height: 70px;
-        padding: 0 5%;
-    }
-    header nav {
-        position: absolute;
-        top: 70px;
-        left: 0;
-        width: 100%;
-        background-color: #1e293b;
-        border-bottom: 2px solid #00df9a;
-        display: flex;
-        flex-direction: column;
-        padding: 20px;
-        gap: 15px;
-        max-height: 0;
-        opacity: 0;
-        pointer-events: none;
-        transition: all 0.3s ease-in-out;
-        z-index: 99;
-    }
-    header nav.active {
-        max-height: 350px;
-        opacity: 1;
-        pointer-events: auto;
-    }
-    header nav a {
-        margin-left: 0;
-        width: 100%;
-        text-align: center;
-        padding: 10px 0;
-        font-size: 15px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    }
-    .logo-text{
-        text-transform: uppercase;
-        letter-spacing: 3px;
-    }
-    header nav a:last-child {
-        border-bottom: none;
-    }
-    .hero-content h1 {
-        font-size: 38px;
-    }
-    .hero-content h3 {
-        font-size: 18px;
-    }
-    .about-content h3, .skill-content h3, .heading {
-        font-size: 28px;
-    }
-    .about-content p {
-        font-size: 15px;
-        line-height: 1.6;
-    }
-    .projects-container {
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        gap: 20px;
-    }
-    .project-card {
-        padding: 20px;
-    }
-    .hero-section, .about-me, .skills, .projects, .contact-section {
-        padding: 60px 5% 60px;
-    }
+  .menu-icon {
+    display: block;
+  }
+  header {
+    height: 70px;
+    padding: 0 5%;
+  }
+  header nav {
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background-color: #030f18;
+    border-bottom: 2px solid #72a3bf;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 15px;
+    max-height: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease-in-out;
+    z-index: 99;
+  }
+  header nav.active {
+    max-height: 350px;
+    opacity: 1;
+    pointer-events: auto;
+  }
+  header nav a {
+    margin-left: 0;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+    color: #446e87;
+  }
+  header nav a:last-child {
+    border-bottom: none;
+  }
+  .hero-content h1 {
+    font-size: 38px;
+  }
+  .hero-content h3 {
+    font-size: 18px;
+  }
+  .about-content h3,
+  .skill-content h3,
+  .heading {
+    font-size: 28px;
+  }
+  .about-content p {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  .projects-container {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+  }
+  .project-card {
+    padding: 20px;
+  }
+  .hero-section,
+  .about-me,
+  .skills,
+  .projects,
+  .contact-section {
+    padding: 60px 5% 60px;
+  }
+}
+
+.swal2-popup {
+  background: #111827 !important;
+  border: 1px solid rgba(229, 198, 144, 0.3) !important;
+  color: #fff !important;
+  border-radius: 12px !important;
+  font-family: "Poppins", sans-serif;
+}
+
+.swal2-title {
+  color: #e5c690 !important;
+}
+
+.swal2-html-container {
+  color: #94a3b8 !important;
+}
+
+.swal2-popup {
+  background: #111827 !important;
+  border: 1px solid rgba(229, 198, 144, 0.3) !important;
+  color: #fff !important;
+  border-radius: 12px !important;
+  font-family: "Poppins", sans-serif;
+}
+
+.swal2-title {
+  color: #e5c690 !important;
+}
+
+.swal2-html-container {
+  color: #94a3b8 !important;
+}
+
+/* تحسينات الـ Responsive للمودال على الموبايل */
+#auth-modal * {
+  box-sizing: border-box !important;
+}
+
+@media (max-width: 480px) {
+  #auth-modal > div {
+    width: 92% !important;
+    padding: 25px 20px !important;
+  }
+
+  #auth-modal h2 {
+    font-size: 1.3rem !important;
+  }
+
+  #auth-modal input,
+  #auth-modal button {
+    font-size: 0.9rem !important;
+    padding: 11px !important;
+  }
 }

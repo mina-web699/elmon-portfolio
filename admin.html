@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - BYD Admin Space</title>
+    <link rel="stylesheet" href="./style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+        body {
+            background: #0b0f19;
+            font-family: 'Poppins', sans-serif;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 15px;
+            /* تقليل البادينج الخارجي ليناسب الموبايل */
+            box-sizing: border-box;
+        }
+
+        .dashboard-wrapper {
+            background: #111827;
+            border: 1px solid rgba(229, 198, 144, 0.2);
+            border-radius: 12px;
+            width: 100%;
+            max-width: 500px;
+            padding: 30px 20px;
+            /* جعل البادينج مرن للشاشات الصغيرة */
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            position: relative;
+            margin-top: 55px;
+            /* مساحة علوية كافية لعدم تداخل زرار الـ Logout */
+            margin-bottom: 30px;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            font-size: 1.6rem;
+            /* ضبط حجم الخط المناسب للموبايل والكمبيوتر */
+            color: #e5c690;
+            text-align: center;
+            margin-bottom: 8px;
+            margin-top: 0;
+            font-weight: 600;
+        }
+
+        p.subtitle {
+            text-align: center;
+            color: #94a3b8;
+            font-size: 0.85rem;
+            margin-bottom: 25px;
+            line-height: 1.4;
+            /* زيادة التباعد السطري لراحة العين */
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            color: #e5c690;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(229, 198, 144, 0.15);
+            border-radius: 6px;
+            padding: 12px;
+            color: #fff;
+            font-size: 0.95rem;
+            outline: none;
+            transition: 0.3s;
+            font-family: 'Poppins', sans-serif;
+            width: 100%;
+            /* ضمان التمدد الكامل */
+            box-sizing: border-box;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #e5c690;
+            background: rgba(255, 255, 255, 0.04);
+            box-shadow: 0 0 8px rgba(229, 198, 144, 0.1);
+        }
+
+        .form-group textarea {
+            height: 110px;
+            resize: none;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            background: #e5c690;
+            color: #111827;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+            box-shadow: 0 4px 12px rgba(229, 198, 144, 0.15);
+        }
+
+        .btn-submit:hover {
+            background: #d4b57e;
+            transform: translateY(-1px);
+        }
+
+        /* 🛠️ تعديل مكان زرار تسجيل الخروج لمنع التداخل نهائياً فوق الكارد */
+        .btn-logout {
+            position: absolute;
+            top: -45px;
+            right: 0;
+            background: transparent;
+            border: 1px solid #ef4444;
+            color: #ef4444;
+            padding: 6px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn-logout:hover {
+            background: #ef4444;
+            color: #fff;
+        }
+
+        .swal2-popup {
+            background: #111827 !important;
+            border: 1px solid rgba(229, 198, 144, 0.3) !important;
+            color: #fff !important;
+            border-radius: 12px !important;
+        }
+
+        .swal2-title {
+            color: #e5c690 !important;
+        }
+
+        .swal2-html-container {
+            color: #94a3b8 !important;
+        }
+
+        .manage-projects-section {
+            width: 100%;
+            max-width: 500px;
+            background: #111827;
+            border: 1px solid rgba(229, 198, 144, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            box-sizing: border-box;
+        }
+
+        .manage-projects-section h2 {
+            font-size: 1.2rem;
+            color: #e5c690;
+            margin-top: 0;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(229, 198, 144, 0.1);
+            padding-bottom: 10px;
+        }
+
+        .admin-project-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 6px;
+            margin-bottom: 10px;
+            gap: 10px;
+            /* منع التماسك العرضي للنصوص مع زر الحذف */
+        }
+
+        .admin-project-item span {
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: #f3f4f6;
+            word-break: break-word;
+            /* منع خروج العناوين الطويلة عن الحافة */
+        }
+
+        .btn-delete {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid #ef4444;
+            color: #ef4444;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: 0.3s;
+            white-space: nowrap;
+            /* منع انقسام كلمة الحذف لسطرين */
+        }
+
+        .btn-delete:hover {
+            background: #ef4444;
+            color: #fff;
+        }
+
+        /* استعلامات الميديا للهواتف بالغة الصغر للضمان الشامل */
+        @media (max-width: 360px) {
+
+            .dashboard-wrapper,
+            .manage-projects-section {
+                padding: 20px 15px;
+            }
+
+            h1 {
+                font-size: 1.4rem;
+            }
+
+            .btn-logout {
+                font-size: 0.8rem;
+                padding: 5px 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <script>
+        if (sessionStorage.getItem("adminLoggedIn") !== "true") {
+            window.location.href = "./index.html";
+        }
+    </script>
+
+    <div class="dashboard-wrapper">
+        <button class="btn-logout" id="logout-btn">Log Out 🚪</button>
+        <h1>B Y D Dashboard</h1>
+        <p class="subtitle">املاً الحقول لإضافة مشروعك الجديد ديناميكياً للـ Portfolio</p>
+
+        <form id="add-project-form">
+            <div class="form-group">
+                <label>Project Title</label>
+                <input type="text" id="proj-title" placeholder="e.g., Gym Website" required>
+            </div>
+            <div class="form-group">
+                <label>Description</label>
+                <textarea id="proj-desc" placeholder="Write a clean and precise description of the project..."
+                    required></textarea>
+            </div>
+            <div class="form-group">
+                <label>Live Demo URL</label>
+                <input type="url" id="proj-live" placeholder="https://mina-web699.github.io/..." required>
+            </div>
+            <div class="form-group">
+                <label>Source Code URL</label>
+                <input type="url" id="proj-github" placeholder="https://github.com/..." required>
+            </div>
+            <button type="submit" class="btn-submit">نشر وحفظ المشروع الآن 🚀</button>
+        </form>
+    </div>
+
+    <div class="manage-projects-section">
+        <h2>إدارة المشاريع الحالية 🛠️</h2>
+        <div id="admin-projects-list">
+            <p style="color: #94a3b8; font-size: 0.9rem; text-align: center;">جاري تحميل المشاريع...</p>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, getDocs, query, orderBy, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+        import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCOteYYr4drjiRpWeIwiaqOPL3iu5dSdvU",
+            authDomain: "portifleo-b-y-d.firebaseapp.com",
+            projectId: "portifleo-b-y-d",
+            storageBucket: "portifleo-b-y-d.firebasestorage.app",
+            messagingSenderId: "413280846501",
+            appId: "1:413280846501:web:ec652d3f67d8d658c7034c",
+            measurementId: "G-Z29L0F647V"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+
+        const addProjectForm = document.getElementById("add-project-form");
+        const logoutBtn = document.getElementById("logout-btn");
+        const adminProjectsList = document.getElementById("admin-projects-list");
+
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            background: '#111827',
+            color: '#fff',
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        });
+
+        logoutBtn.addEventListener("click", () => {
+            sessionStorage.removeItem("adminLoggedIn");
+            Toast.fire({
+                icon: 'info',
+                title: 'تم تسجيل الخروج بنجاح'
+            }).then(() => {
+                window.location.href = "./index.html";
+            });
+        });
+
+        async function fetchAdminProjects() {
+            try {
+                const q = query(collection(db, "projects"), orderBy("createdAt", "desc"));
+                const querySnapshot = await getDocs(q);
+                adminProjectsList.innerHTML = "";
+
+                if (querySnapshot.empty) {
+                    adminProjectsList.innerHTML = `<p style='color: #94a3b8; text-align: center; font-size: 0.9rem;'>لا توجد مشاريع مرفوعة حالياً.</p>`;
+                    return;
+                }
+
+                querySnapshot.forEach((projectDoc) => {
+                    const data = projectDoc.data();
+                    const projectId = projectDoc.id;
+
+                    const itemRow = document.createElement("div");
+                    itemRow.className = "admin-project-item";
+                    itemRow.innerHTML = `
+                        <span>${data.title}</span>
+                        <button class="btn-delete" data-id="${projectId}">حذف 🗑️</button>
+                    `;
+                    adminProjectsList.appendChild(itemRow);
+                });
+
+                document.querySelectorAll(".btn-delete").forEach(button => {
+                    button.addEventListener("click", async (e) => {
+                        const id = e.target.getAttribute("data-id");
+                        await deleteProject(id);
+                    });
+                });
+
+            } catch (error) {
+                console.error("Error fetching projects for admin: ", error);
+            }
+        }
+
+        async function deleteProject(projectId) {
+            if (!auth.currentUser) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'انتهت الجلسة',
+                    text: 'يرجى إعادة تسجيل الدخول!'
+                }).then(() => { window.location.href = "./index.html"; });
+                return;
+            }
+
+            const result = await Swal.fire({
+                title: 'هل أنت متأكد؟',
+                text: "لن تتمكن من استعادة هذا مشروع بعد الحذف!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#ef4444',
+                cancelButtonColor: '#94a3b8',
+                confirmButtonText: 'نعم، احذفه! 🗑️',
+                cancelButtonText: 'إلغاء'
+            });
+
+            if (result.isConfirmed) {
+                try {
+                    await deleteDoc(doc(db, "projects", projectId));
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'تم حذف المشروع بنجاح!'
+                    });
+                    fetchAdminProjects();
+                } catch (error) {
+                    console.error("Error deleting document: ", error);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'خطأ في الحذف',
+                        text: 'تأكد من إعدادات الـ Security Rules في Firebase.'
+                    });
+                }
+            }
+        }
+
+        addProjectForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            if (!auth.currentUser) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'عفواً!',
+                    text: 'انتهت جلستك الأمنية، سجل دخولك مرة أخرى.'
+                }).then(() => { window.location.href = "./index.html"; });
+                return;
+            }
+
+            const projectData = {
+                title: document.getElementById("proj-title").value.trim(),
+                description: document.getElementById("proj-desc").value.trim(),
+                live: document.getElementById("proj-live").value.trim(),
+                github: document.getElementById("proj-github").value.trim(),
+                createdAt: new Date()
+            };
+
+            try {
+                await addDoc(collection(db, "projects"), projectData);
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'تم الرفع بنجاح! 🎉',
+                    text: 'تمت إضافة مشروعك الجديد إلى الـ Portfolio بنجاح ديناميكي كامل.',
+                    confirmButtonColor: '#e5c690'
+                });
+
+                addProjectForm.reset();
+                fetchAdminProjects();
+            } catch (error) {
+                console.error("Error writing to database: ", error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'فشل الرفع',
+                    text: 'حدث خطأ غير متوقع أثناء إرسال البيانات للفايربيز.'
+                });
+            }
+        });
+
+        fetchAdminProjects();
+    </script>
+</body>
+
+</html>
