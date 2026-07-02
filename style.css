@@ -1,4 +1,14 @@
-/* GLOBAL STYLES */
+/* --- 1. GLOBAL STYLES & VARIABLES --- */
+:root {
+  --bg-dark: #040a06; /* أسود عميق مائل للأخضر للسكاشن الرئيسية */
+  --bg-card: #0b150e; /* أسود رمادي متناسق للبطاقات والخلفيات الثانوية */
+  --main-glow: #82cd2b; /* الأخضر الليموني المضيء الهوية الأساسية */
+  --text-primary: #ffffff; /* نصوص أساسية بيضاء صريحة */
+  --text-secondary: #a3b8a8; /* نصوص فرعية رمادية مائلة للأخضر لقراءة مريحة */
+  --glass-bg: rgba(11, 21, 14, 0.6);
+  --glass-border: rgba(130, 205, 43, 0.08);
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -7,19 +17,23 @@
   list-style: none;
   text-decoration: none;
 }
+
 body {
-  background-color: #030f18; 
-  color: #e0e8e6; 
+  background-color: var(--bg-dark);
+  color: var(--text-secondary);
   font-family: "Poppins", sans-serif;
   overflow-x: hidden;
 }
+
 h1,
 .heading,
 .logo-icon {
-  font-family: "Vast Shadow", serif;
+  font-family:
+    "Poppins", sans-serif; /* الفونيت المحترف العريض يمنح شعوراً بالـ Premium */
+  font-weight: 800;
 }
 
-/* HEADER & NAVBAR STYLES */
+/* --- 2. HEADER & NAVIGATION (Glassmorphism Effect) --- */
 header {
   position: fixed;
   top: 0;
@@ -27,323 +41,532 @@ header {
   width: 100%;
   height: 80px;
   padding: 0 10%;
-  background-color: rgba(
-    3,
-    15,
-    24,
-    0.8
-  ); 
-  backdrop-filter: blur(12px);
+  background-color: rgba(4, 10, 6, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   display: flex;
   justify-content: space-between;
   align-items: center;
   z-index: 100;
-  border-bottom: 1px solid rgba(114, 163, 191, 0.1); 
-  transition: 0.3s ease;
+  border-bottom: 1px solid var(--glass-border);
+  transition: all 0.4s ease;
 }
+
 .logo a {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 2px;
 }
+
 .logo .logo-icon {
-  font-size: 20px;
-  color: #72a3bf; 
+  font-size: 22px;
+  color: var(--main-glow);
+  letter-spacing: 1px;
   transition: 0.3s ease;
+  text-shadow: 0 0 10px rgba(130, 205, 43, 0.3);
 }
+
 .logo .logo-text {
-  font-size: 12px;
-  font-weight: 600;
-  color: #e0e8e6;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-primary);
   text-transform: uppercase;
-  letter-spacing: 4px;
+  letter-spacing: 5px;
 }
+
 header nav a {
   display: inline-block;
-  font-size: 16px;
-  color: #446e87; 
+  font-size: 15px;
+  color: var(--text-secondary);
   font-weight: 500;
   margin-left: 35px;
-  transition: 0.3s ease;
+  transition: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   text-transform: capitalize;
+  position: relative;
 }
+
+header nav a::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--main-glow);
+  transition: width 0.3s ease;
+}
+
+header nav a:hover::after,
+header nav a.active-link::after {
+  width: 100%;
+}
+
 header nav a:hover,
-.logo a:hover .logo-icon {
-  color: #72a3bf; 
-  transform: translateY(-2px);
-  text-shadow: 0 0 15px rgba(114, 163, 191, 0.4);
-}
 header nav a.active-link {
-  color: #72a3bf;
-  border-bottom: 2px solid #72a3bf;
+  color: var(--main-glow);
+  text-shadow: 0 0 15px rgba(130, 205, 43, 0.4);
 }
+
 .menu-icon {
   font-size: 28px;
-  color: #e0e8e6;
+  color: var(--text-primary);
   cursor: pointer;
   display: none;
 }
 
-/* ==================== HERO SECTION WITH IMAGE ==================== */
+/* --- 3. HERO SECTION (Neon Gradient Glow) --- */
 .hero-section {
   position: relative;
+  width: 100%;
   min-height: 100vh;
   display: flex;
   align-items: center;
-  padding: 0 10%;
+  background: radial-gradient(circle at 75% 50%, #0c2111 0%, #040a06 100%);
+  padding: 100px 0 60px 0;
   overflow: hidden;
-
-
-  background-image: url("./bg-imge-hd/c0796d87b72bb5813f93d2eca9bf25a4.jpg");
-  background-size: cover;
-  background-position: center; 
-  background-repeat: no-repeat;
-  background-color: #030f18; 
 }
 
-
-.video-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
+.hero-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
-  height: 100%;
-  z-index: 2; 
-
-  background: linear-gradient(
-    to bottom,
-    rgba(3, 15, 24, 0.85),
-    rgba(3, 15, 24, 0.75)
-  );
+  padding: 0 10%;
+  gap: 50px;
+  z-index: 2;
 }
-
 
 .hero-content {
-  position: relative;
-  z-index: 10; 
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 15px;
-  max-width: 700px;
+  max-width: 600px;
 }
 
-
-.hero-content h3 {
-  font-size: 24px;
-  font-weight: 500;
-  color: #72a3bf;
-  margin: 0;
+.hero-content .welcome-text {
+  color: var(--main-glow);
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 15px;
 }
 
 .hero-content h1 {
-  font-size: 56px;
-  font-weight: 700;
-  color: #e0e8e6; 
-  line-height: 1.2;
-  margin: 0;
+  font-size: 64px;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 20px;
+  color: var(--text-primary);
 }
 
 .hero-content p {
+  color: var(--text-secondary);
+  line-height: 1.8;
+  font-size: 16px;
+  margin-bottom: 40px;
+}
+
+.hero-content .social-icons {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 40px;
+}
+
+.hero-content .social-icons a {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 2px solid rgba(130, 205, 43, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--text-primary);
   font-size: 18px;
-  color: #e0e8e6;
-  line-height: 1.6;
-  margin: 0;
+  background-color: rgba(11, 21, 14, 0.4);
+  transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.hero-content .text-animate {
-  color: #72a3bf;
-  font-weight: 600;
-  text-shadow: 0 0 15px rgba(114, 163, 191, 0.5);
+.hero-content .social-icons a:hover {
+  color: #040a06;
+  background-color: var(--main-glow);
+  border-color: var(--main-glow);
+  box-shadow: 0 0 20px var(--main-glow);
+  transform: translateY(-4px);
 }
 
-/* ABOUT ME SECTION STYLES */
+.cv-btn {
+  background-color: var(--main-glow);
+  color: #040a06;
+  padding: 16px 36px;
+  border: none;
+  border-radius: 30px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 1px;
+  box-shadow: 0 0 25px rgba(130, 205, 43, 0.4);
+  transition: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.cv-btn:hover {
+  box-shadow: 0 0 45px rgba(130, 205, 43, 0.8);
+  transform: translateY(-3px);
+}
+
+/* --- PHOTO RINGS WITH STATIC DIAMETER & SHADOW PULSE --- */
+.hero-image-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ring {
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.4s ease;
+}
+
+/* الحلقة الخارجية: نبض الشادو فقط دون تحريك الدائرة */
+.outer-ring {
+  width: 440px;
+  height: 440px;
+  border: 1px solid rgba(130, 205, 43, 0.05);
+  background: radial-gradient(
+    circle,
+    rgba(130, 205, 43, 0.02) 0%,
+    transparent 70%
+  );
+  animation: shadowPulseOuter 4s infinite ease-in-out;
+}
+
+/* الحلقة الوسطى: نبض الشادو فقط */
+.middle-ring {
+  width: 380px;
+  height: 380px;
+  border: 2px solid rgba(130, 205, 43, 0.15);
+  animation: shadowPulseMiddle 3s infinite ease-in-out;
+}
+
+/* الحلقة الداخلية الأساسية: حجم ثابت 100% والتوهج ينبض في الخلفية */
+.inner-ring {
+  width: 320px;
+  height: 320px;
+  border: 6px solid rgba(130, 205, 43, 0.6);
+  position: relative;
+  background-color: #1b1b1b; /* لون خلفية الدائرة الرمادي مثل الصورة الأولى */
+  animation: shadowPulseInner 2s infinite ease-in-out;
+  /* أزلنا الـ overflow: hidden من هنا لكي نسمح للصورة بالخروج لأعلى */
+}
+
+/* الحاوية السحرية لقص أسفل الصورة والسماح بالبروز من الأعلى */
+.img-container {
+  position: absolute;
+  bottom: 0; /* ترتكز في الأسفل */
+  width: 100%;
+  height: 140%; /* جعلناها أطول من الدائرة لتسمح للرأس بالخروج للأعلى */
+  border-radius: 0 0 160px 160px; /* قص الحواف السفلية فقط لتطابق انحناء الدائرة */
+  overflow: hidden; /* يقص الصورة من الأسفل والجوانب فقط */
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+/* ضبط أبعاد الصورة داخل الحاوية */
+.img-container img {
+  width: 95%;
+  height: auto;
+  max-height: 100%;
+  object-fit: cover;
+  transform: scale(1);
+  transform-origin: bottom center;
+  transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* تأثير الـ Hover: الصورة تندفع وتبرز للأمام وللأعلى أكثر عند مرور الماوس */
+.hero-image-wrapper:hover .img-container img {
+  transform: scale(1.08) translateY(-5px);
+}
+
+.hero-image-wrapper:hover .inner-ring {
+  border-color: rgba(130, 205, 43, 0.9);
+  box-shadow:
+    0 0 50px rgba(130, 205, 43, 0.8),
+    inset 0 0 30px rgba(130, 205, 43, 0.4);
+}
+
+/* --- ANIMATIONS: SHADOW ONLY PULSE (نبض الشادو والوميض فقط) --- */
+
+@keyframes shadowPulseInner {
+  0% {
+    box-shadow:
+      0 0 30px rgba(130, 205, 43, 0.3),
+      inset 0 0 20px rgba(130, 205, 43, 0.2);
+  }
+  50% {
+    box-shadow:
+      0 0 50px rgba(130, 205, 43, 0.6),
+      inset 0 0 35px rgba(130, 205, 43, 0.4); /* الوميض يقوى ويضعف */
+  }
+  100% {
+    box-shadow:
+      0 0 30px rgba(130, 205, 43, 0.3),
+      inset 0 0 20px rgba(130, 205, 43, 0.2);
+  }
+}
+
+@keyframes shadowPulseMiddle {
+  0% {
+    box-shadow: 0 0 15px rgba(130, 205, 43, 0.05);
+  }
+  50% {
+    box-shadow: 0 0 35px rgba(130, 205, 43, 0.25);
+  }
+  100% {
+    box-shadow: 0 0 15px rgba(130, 205, 43, 0.05);
+  }
+}
+
+@keyframes shadowPulseOuter {
+  0% {
+    box-shadow: 0 0 10px rgba(130, 205, 43, 0.02);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(130, 205, 43, 0.15);
+  }
+  100% {
+    box-shadow: 0 0 10px rgba(130, 205, 43, 0.02);
+  }
+}
+
+/* --- 4. ABOUT ME SECTION (Modern Clean) --- */
 .about-me {
-  padding: 100px 10% 80px;
-  background-color: #1d4052; 
-  color: #e0e8e6;
+  padding: 120px 10% 100px;
+  background-color: var(--bg-card);
+  border-top: 1px solid var(--glass-border);
+  border-bottom: 1px solid var(--glass-border);
 }
+
 .about-content h3 {
   text-align: center;
-  font-size: 36px;
-  margin-bottom: 40px;
-  color: #72a3bf;
-  font-family: "Vast Shadow", serif;
-}
-.about-content p {
-  max-width: 800px;
-  margin: 0 auto;
-  text-align: center;
-  font-size: 18px;
-  line-height: 1.8;
-  opacity: 0.95;
+  font-size: 38px;
+  margin-bottom: 30px;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
-/* SKILLS SECTION STYLES */
-.skills {
-  padding: 100px 10% 80px;
-  background-color: #030f18;
+.about-content p {
+  max-width: 750px;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 17px;
+  line-height: 1.9;
+  color: var(--text-secondary);
 }
+
+/* --- 5. SKILLS SECTION (Badges UI) --- */
+.skills {
+  padding: 120px 10% 100px;
+  background-color: var(--bg-dark);
+}
+
 .skill-content h3 {
   text-align: center;
-  font-size: 36px;
-  margin-bottom: 40px;
-  color: #72a3bf;
-  font-family: "Vast Shadow", serif;
+  font-size: 38px;
+  margin-bottom: 50px;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
+
 .skill-content > ul {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
-}
-.skill-content > ul > li {
-  background-color: #1d4052; 
-  padding: 15px 30px;
-  border-radius: 8px;
-  font-weight: 600;
-  font-size: 18px;
-  text-transform: uppercase;
-  border: 1px solid rgba(114, 163, 191, 0.15);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-}
-.skill-content ul li ul li {
-  font-size: 14px;
-  color: #72a3bf;
-  margin-top: 5px;
-  text-transform: capitalize;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
-/* PROJECTS SECTION STYLES */
-.projects {
-  padding: 100px 10% 80px;
-  background-color: #1d4052; 
+.skill-content > ul > li {
+  background-color: var(--bg-card);
+  padding: 16px 32px;
+  border-radius: 14px;
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  border: 1px solid rgba(130, 205, 43, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
 }
+
+.skill-content > ul > li:hover {
+  border-color: var(--main-glow);
+  box-shadow: 0 0 20px rgba(130, 205, 43, 0.2);
+  transform: translateY(-4px);
+  color: var(--main-glow);
+}
+
+.skill-content ul li ul li {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-top: 8px;
+  text-transform: capitalize;
+  font-weight: 400;
+}
+
+/* --- 6. PROJECTS SECTION (Premium Glass Cards) --- */
+.projects {
+  padding: 120px 10% 100px;
+  background-color: var(--bg-card);
+  border-top: 1px solid var(--glass-border);
+}
+
 .heading {
   text-align: center;
-  font-size: 36px;
-  margin-bottom: 50px;
-  color: #e0e8e6;
+  font-size: 38px;
+  margin-bottom: 60px;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
+
 .heading span {
-  color: #72a3bf;
+  color: var(--main-glow);
+  text-shadow: 0 0 20px rgba(130, 205, 43, 0.3);
 }
+
 .projects-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 30px;
 }
+
 .project-card {
-  background-color: #030f18; 
-  border-radius: 12px;
-  padding: 25px;
-  border: 1px solid rgba(255, 255, 255, 0.01);
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  background-color: var(--bg-dark);
+  border-radius: 16px;
+  padding: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.02);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
+
 .project-card:hover {
-  transform: translateY(-6px);
-  border-color: #72a3bf; 
-  box-shadow: 0 15px 30px rgba(114, 163, 191, 0.12);
+  transform: translateY(-8px) scale(1.01);
+  border-color: rgba(130, 205, 43, 0.3);
+  box-shadow: 0 20px 40px rgba(130, 205, 43, 0.1);
 }
+
 .project-card h3 {
-  font-size: 20px;
+  font-size: 22px;
   margin-bottom: 15px;
-  color: #e0e8e6;
+  color: var(--text-primary);
 }
+
 .project-card p {
-  color: #e0e8e6;
-  opacity: 0.8;
-  font-size: 14px;
-  line-height: 1.5;
-  margin-bottom: 20px;
+  color: var(--text-secondary);
+  font-size: 14.5px;
+  line-height: 1.7;
+  margin-bottom: 25px;
+  height: 70px; /* لتوحيد أحجام الكروت تلقائياً */
+  overflow: hidden;
 }
+
 .project-links {
   display: flex;
   gap: 15px;
 }
+
 .btn-sm {
-  padding: 8px 16px;
-  border: 1px solid #72a3bf;
-  color: #72a3bf;
-  border-radius: 6px;
+  padding: 10px 20px;
+  border: 1px solid var(--main-glow);
+  color: var(--main-glow);
+  border-radius: 8px;
   font-size: 14px;
   font-weight: 600;
   background-color: transparent;
-  transition: 0.3s ease;
-}
-.btn-sm:hover {
-  background-color: #72a3bf;
-  color: #030f18; 
-  box-shadow: 0 0 15px rgba(114, 163, 191, 0.3);
+  transition: all 0.3s ease;
 }
 
-/* CONTACT SECTION STYLES */
+.btn-sm:hover {
+  background-color: var(--main-glow);
+  color: #040a06;
+  box-shadow: 0 0 15px rgba(130, 205, 43, 0.4);
+}
+
+/* --- 7. CONTACT SECTION --- */
 .contact-section {
-  padding: 100px 10% 80px;
+  padding: 120px 10% 100px;
   text-align: center;
-  background-color: #030f18;
+  background-color: var(--bg-dark);
 }
+
 .contact-section p {
-  margin-bottom: 30px;
-  color: #e0e8e6;
-  opacity: 0.85;
+  margin-bottom: 40px;
+  color: var(--text-secondary);
+  font-size: 16px;
 }
-.contact-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 25px;
-}
-.social-icons {
+
+.contact-container .social-icons {
   display: flex;
   gap: 20px;
   justify-content: center;
 }
+
 .social-icon {
   font-size: 24px;
-  color: #e0e8e6;
-  background-color: #1d4052; 
-  width: 50px;
-  height: 50px;
+  color: var(--text-primary);
+  background-color: var(--bg-card);
+  width: 55px;
+  height: 55px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(255, 255, 255, 0.02);
-  transition: 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  transition: all 0.3s ease;
 }
+
+.social-icon:hover {
+  transform: translateY(-5px);
+}
+
 .social-icon.email:hover {
-  color: #72a3bf;
-  border-color: #72a3bf;
-  box-shadow: 0 0 15px rgba(114, 163, 191, 0.3);
+  color: var(--main-glow);
+  border-color: var(--main-glow);
+  box-shadow: 0 0 20px rgba(130, 205, 43, 0.3);
 }
+
 .social-icon.whatsapp:hover {
   color: #25d366;
   border-color: #25d366;
-  box-shadow: 0 0 15px rgba(37, 211, 102, 0.3);
+  box-shadow: 0 0 20px rgba(37, 211, 102, 0.3);
 }
+
 .social-icon.instagram:hover {
   color: #e1306c;
   border-color: #e1306c;
-  box-shadow: 0 0 15px rgba(225, 48, 108, 0.3);
+  box-shadow: 0 0 20px rgba(225, 48, 108, 0.3);
 }
 
-/* FOOTER & SCROLL TOP STYLES */
+/* --- 8. FOOTER & SCROLL TOP --- */
 .main-footer {
-  padding: 25px 10%;
-  background-color: #030f18;
+  padding: 30px 10%;
+  background-color: #020604;
   text-align: center;
-  border-top: 1px solid rgba(114, 163, 191, 0.05);
+  border-top: 1px solid var(--glass-border);
   font-size: 14px;
-  color: #446e87; 
+  color: var(--text-secondary);
 }
+
 .scroll-top {
   position: fixed;
   bottom: 30px;
   right: 20px;
-  background-color: #72a3bf;
-  color: #030f18;
+  background-color: var(--main-glow);
+  color: #040a06;
   width: 45px;
   height: 45px;
   border-radius: 50%;
@@ -353,18 +576,46 @@ header nav a.active-link {
   font-size: 20px;
   cursor: pointer;
   transform: rotate(-90deg);
-  box-shadow: 0 5px 20px rgba(114, 163, 191, 0.4);
+  box-shadow: 0 5px 20px rgba(130, 205, 43, 0.4);
   z-index: 999;
   transition: 0.3s ease;
   opacity: 0;
   pointer-events: none;
 }
+
 .scroll-top.show {
   opacity: 1;
   pointer-events: auto;
 }
 
-/* RESPONSIVE MEDIA QUERY (FROM 320px TO 780px) */
+/* --- 9. RESPONSIVE MEDIA QUERIES --- */
+@media screen and (max-width: 992px) {
+  .hero-container {
+    flex-direction: column-reverse;
+    text-align: center;
+    gap: 40px;
+    padding-top: 40px;
+  }
+  .hero-content .social-icons {
+    justify-content: center;
+  }
+  .outer-ring {
+    width: 370px;
+    height: 370px;
+  }
+  .middle-ring {
+    width: 320px;
+    height: 320px;
+  }
+  .inner-ring {
+    width: 270px;
+    height: 270px;
+  }
+  .hero-content h1 {
+    font-size: 46px;
+  }
+}
+
 @media screen and (max-width: 780px) {
   .menu-icon {
     display: block;
@@ -378,8 +629,8 @@ header nav a.active-link {
     top: 70px;
     left: 0;
     width: 100%;
-    background-color: #030f18;
-    border-bottom: 2px solid #72a3bf;
+    background-color: var(--bg-dark);
+    border-bottom: 2px solid var(--main-glow);
     display: flex;
     flex-direction: column;
     padding: 20px;
@@ -402,92 +653,39 @@ header nav a.active-link {
     padding: 10px 0;
     font-size: 15px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.02);
-    color: #446e87;
   }
   header nav a:last-child {
     border-bottom: none;
   }
-  .hero-content h1 {
-    font-size: 38px;
-  }
-  .hero-content h3 {
-    font-size: 18px;
-  }
   .about-content h3,
   .skill-content h3,
   .heading {
-    font-size: 28px;
-  }
-  .about-content p {
-    font-size: 15px;
-    line-height: 1.6;
+    font-size: 30px;
   }
   .projects-container {
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 20px;
-  }
-  .project-card {
-    padding: 20px;
   }
   .hero-section,
   .about-me,
   .skills,
   .projects,
   .contact-section {
-    padding: 60px 5% 60px;
+    padding: 80px 5% 80px;
   }
 }
 
+/* SweetAlert2 Styling Customization */
 .swal2-popup {
-  background: #111827 !important;
-  border: 1px solid rgba(229, 198, 144, 0.3) !important;
-  color: #fff !important;
-  border-radius: 12px !important;
+  background: var(--bg-card) !important;
+  border: 1px solid var(--glass-border) !important;
+  color: var(--text-primary) !important;
+  border-radius: 16px !important;
   font-family: "Poppins", sans-serif;
 }
-
 .swal2-title {
-  color: #e5c690 !important;
+  color: var(--main-glow) !important;
 }
-
 .swal2-html-container {
-  color: #94a3b8 !important;
-}
-
-.swal2-popup {
-  background: #111827 !important;
-  border: 1px solid rgba(229, 198, 144, 0.3) !important;
-  color: #fff !important;
-  border-radius: 12px !important;
-  font-family: "Poppins", sans-serif;
-}
-
-.swal2-title {
-  color: #e5c690 !important;
-}
-
-.swal2-html-container {
-  color: #94a3b8 !important;
-}
-
-/* تحسينات الـ Responsive للمودال على الموبايل */
-#auth-modal * {
-  box-sizing: border-box !important;
-}
-
-@media (max-width: 480px) {
-  #auth-modal > div {
-    width: 92% !important;
-    padding: 25px 20px !important;
-  }
-
-  #auth-modal h2 {
-    font-size: 1.3rem !important;
-  }
-
-  #auth-modal input,
-  #auth-modal button {
-    font-size: 0.9rem !important;
-    padding: 11px !important;
-  }
+  color: var(--text-secondary) !important;
 }
